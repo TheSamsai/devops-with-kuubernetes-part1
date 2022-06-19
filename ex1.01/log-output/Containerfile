@@ -1,0 +1,11 @@
+FROM rust:alpine AS builder
+
+COPY . /app
+WORKDIR /app/
+RUN cargo build --release
+
+from alpine:latest
+RUN mkdir -p /app
+COPY --from=builder /app/target/release/log-output /app
+WORKDIR /app/ 
+CMD ["./log-output"]
