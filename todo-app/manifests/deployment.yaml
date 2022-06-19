@@ -19,7 +19,7 @@ spec:
             claimName: image-claim
       containers:
         - name: todo-app
-          image: thesamsai/todo-app:v2
+          image: thesamsai/todo-app:v3
           volumeMounts:
           - name: image-volume
             mountPath: /shared/image
