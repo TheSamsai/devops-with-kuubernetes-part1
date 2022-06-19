@@ -10,18 +10,16 @@ use std::fs::File;
 async fn main() {
     let string = Uuid::new_v4().hyphenated().to_string();
 
-    tokio::spawn(async move {
-        loop {
-            let message_with_timestamp = return_with_timestamp(&string);
-            println!("{}", message_with_timestamp);
+    loop {
+        let message_with_timestamp = return_with_timestamp(&string);
+        println!("{}", message_with_timestamp);
 
-            let mut file = File::options().create(true).open("/shared/log.txt").expect("Failed to open file!");
+        let mut file = File::create("/shared/log.txt").expect("Failed to open file!");
 
-            file.write_all(message_with_timestamp.as_bytes()).expect("Failed to update log file!");
+        file.write_all(message_with_timestamp.as_bytes()).expect("Failed to update log file!");
 
-            tokio::time::sleep(Duration::from_secs(5)).await;
-        }
-    });
+        tokio::time::sleep(Duration::from_secs(5)).await;
+    }
 }
 
 

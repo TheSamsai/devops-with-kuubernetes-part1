@@ -15,6 +15,9 @@ spec:
       volumes:
         - name: shared-log
           emptyDir: {}
+        - name: shared-ping-pong
+          persistentVolumeClaim:
+            claimName: ping-pong-claim
       containers:
         - name: log-output-generate
           image: thesamsai/log-output-generate:v3
@@ -22,7 +25,9 @@ spec:
             - name: shared-log
               mountPath: /shared
         - name: log-output-view
-          image: thesamsai/log-output-view:v1
+          image: thesamsai/log-output-view:v2
           volumeMounts:
             - name: shared-log
               mountPath: /shared
+            - name: shared-ping-pong
+              mountPath: /shared-ping-pong
