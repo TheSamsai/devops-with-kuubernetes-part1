@@ -12,6 +12,17 @@ spec:
       labels:
         app: log-output
     spec:
+      volumes:
+        - name: shared-log
+          emptyDir: {}
       containers:
-        - name: log-output
-          image: thesamsai/log-output:v3
+        - name: log-output-generate
+          image: thesamsai/log-output-generate:v1
+          volumeMounts:
+            - name: shared-log
+              mountPath: /shared
+        - name: log-output-view
+          image: thesamsai/log-output-view:v1
+          volumeMounts:
+            - name: shared-log
+              mountPath: /shared
