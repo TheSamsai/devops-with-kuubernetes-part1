@@ -17,7 +17,7 @@ spec:
           emptyDir: {}
       containers:
         - name: log-output-generate
-          image: thesamsai/log-output-generate:v1
+          image: thesamsai/log-output-generate:v2
           volumeMounts:
             - name: shared-log
               mountPath: /shared
