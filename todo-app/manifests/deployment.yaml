@@ -13,6 +13,16 @@ spec:
       labels:
         app: todo-app
     spec:
+      volumes:
+        - name: image-volume
+          persistentVolumeClaim:
+            claimName: image-claim
       containers:
         - name: todo-app
-          image: thesamsai/todo-app:v1
+          image: thesamsai/todo-app:v2
+          volumeMounts:
+          - name: image-volume
+            mountPath: /shared/image
+          env:
+          - name: IMAGE_DIR
+            value: "/shared/image"
