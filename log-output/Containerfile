@@ -1,11 +1,11 @@
-FROM rust:alpine AS builder
+FROM rust:latest AS builder
 
 COPY . /app
 WORKDIR /app/
 RUN cargo build --release
 
-from alpine:latest
+from debian:latest
 RUN mkdir -p /app
 COPY --from=builder /app/target/release/log-output /app
 WORKDIR /app/ 
-CMD ["./log-output"]
+CMD ["./todo-app"]

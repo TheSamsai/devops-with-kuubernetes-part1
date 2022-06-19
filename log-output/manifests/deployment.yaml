@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: log-output
-          image: thesamsai/log-output:v1
+          image: thesamsai/log-output:v2
